@@ -1,12 +1,16 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 
 import { useNavigate } from "react-router-dom";
 
 import api from "../../config/configApi";
+import { Context } from "../../Context/AuthContext";
 
 export const Login = () => {
 
   const navigate = useNavigate();
+
+  const { authenticated } = useContext(Context);
+  console.log("User status on login page: " + authenticated);
 
   const [user, setUser] = useState({
     email: "",
