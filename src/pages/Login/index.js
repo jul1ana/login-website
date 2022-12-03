@@ -43,6 +43,7 @@ export const Login = () => {
           // message: response.data.message,
           loading: false
         });
+        localStorage.setItem("token", JSON.stringify(response.data.token));
         return navigate("/dashboard");
       }).catch((err) => {
         if (err.response) {
@@ -76,7 +77,7 @@ export const Login = () => {
         <input type="text" name="email" placeholder="Enter your email" onChange={valueInput} /> <br /><br />
 
         <label>Password: </label>
-        <input type="password" name="password" placeholder="Enter your password" onChange={valueInput} /> <br /><br />
+        <input type="password" name="password" placeholder="Enter your password" autoComplete="on" onChange={valueInput} /> <br /><br />
 
         {status.loading ? <button type="submit" disabled >Accessing...</button> : <button type="submit">Acessar</button>}
       </form>
