@@ -19,3 +19,5 @@ Run the React project
 Manage the routes
 ### npm install react-router-dom
 
+Make call to API
+### npm install --save axios

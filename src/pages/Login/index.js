@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 
+import api from "../../config/configApi";
+
 export const Login = () => {
 
   const [user, setUser] = useState({
@@ -12,8 +14,24 @@ export const Login = () => {
 
   const loginSubmit = async e => {
     e.preventDefault();
-    console.log(user.email);
-    console.log(user.password);
+    // console.log(user.email);
+    // console.log(user.password);
+
+    // conexão com API
+    const headers = {
+      "Content-Type": "application/json"
+    }
+
+    await api.post("/login", user, { headers })
+      .then((response) => {
+        console.log(response);
+      }).catch((err) => {
+        if (err.response) {
+          console.log(err.response);
+        } else {
+          console.log("Error: try later");
+        }
+      });
   }
 
   return (
