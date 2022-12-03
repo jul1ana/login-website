@@ -1,21 +1,21 @@
-COMO RODAR O PROJETO BAIXADO
-Instalar todas as dependências indica pelo package.json
+HOW TO RUN THE DOWNLOADED PROJECT
+Install all dependencies indicated by package.json
 ### npm install
 
-Rodar o projeto React
+Run the React project
 ### npm start
 
 
-SEQUÊNCIA PARA CRIAR O PROJETO
-Criar o projeto React - https://reactjs.org/docs/create-a-new-react-app.html
+SEQUENCE TO CREATE THE PROJECT
+Create the React project - https://reactjs.org/docs/create-a-new-react-app.html
 ### npx create-react-app my-app
 
-Acessar o diretório do projeto
+Access the project directory
 ### cd my-app
 
-Rodar o projeto React
+Run the React project
 ### npm start
 
-Gerenciar as rotas
+Manage the routes
 ### npm install react-router-dom
 
