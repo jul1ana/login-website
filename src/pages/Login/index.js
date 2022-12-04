@@ -47,7 +47,7 @@ export const Login = () => {
           // message: response.data.message,
           loading: false
         });
-        localStorage.setItem("token", JSON.stringify(response.data.token));
+        localStorage.setItem("token", response.data.token);
         signIn(true); // funcao chamada apenas se o usuario conseguir realizar o login
         return navigate("/dashboard");
       }).catch((err) => {

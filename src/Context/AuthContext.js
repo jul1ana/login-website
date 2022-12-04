@@ -14,7 +14,7 @@ function AuthProvider({ children }) {
       const token = localStorage.getItem("token");
 
       // verificando se o usuario tem o token, se tiver entao o usuario esta logado
-      if (token) {
+      if (token && validateUser()) {
         api.defaults.headers.Authorization = `Bearer ${(token)}`;
         setAuthenticated(true);
       };
@@ -24,6 +24,26 @@ function AuthProvider({ children }) {
 
     getLogin();
   }, []);
+
+  const validateUser = async () => {
+    const valueToken = localStorage.getItem("token");
+
+    const headers = {
+      "headers": {
+        "Authorization": "Baerer " + valueToken
+      }
+    }
+
+    await api.get("/validate-token", headers)
+      .then(() => {
+        return true; //token valido
+      }).catch(() => {
+        setAuthenticated(false);
+        localStorage.removeItem("token");
+        api.defaults.headers.Authorization = undefined;
+        return false;
+      })
+  }
 
   async function signIn(userSituation) {
     setAuthenticated(true);
