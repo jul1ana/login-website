@@ -9,7 +9,7 @@ export const Login = () => {
 
   const navigate = useNavigate();
 
-  const { authenticated } = useContext(Context);
+  const { authenticated, signIn } = useContext(Context);
   console.log("User status on login page: " + authenticated);
 
   const [user, setUser] = useState({
@@ -48,6 +48,7 @@ export const Login = () => {
           loading: false
         });
         localStorage.setItem("token", JSON.stringify(response.data.token));
+        signIn(true); // funcao chamada apenas se o usuario conseguir realizar o login
         return navigate("/dashboard");
       }).catch((err) => {
         if (err.response) {
