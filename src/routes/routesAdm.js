@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 
 import { Context } from "../Context/AuthContext";
+import { AddUser } from "../pages/AddUser";
 import { Dashboard } from "../pages/Dashboard";
 import { Login } from "../pages/Login";
 import { Users } from "../pages/Users";
@@ -18,6 +19,7 @@ export default function RoutesAdm() {
       <Route path="/" element={<Login />} />
       <Route path="/dashboard" element={<CustomRoute redirectTo="/"><Dashboard /></CustomRoute>} />
       <Route path="/users" element={<CustomRoute redirectTo="/"><Users /></CustomRoute>} />
+      <Route path="/add-user" element={<CustomRoute redirectTo="/"><AddUser /></CustomRoute>} />
     </Routes>
   );
 }

@@ -47,6 +47,7 @@ export const Users = () => {
       <Link to="/users">Users</Link> <br />
 
       <h1>List Users</h1>
+      <Link to="/add-user">Register</Link> <br /> <hr />
 
       {status.type === "error" ? <p>{status.message}</p> : ""}
 
