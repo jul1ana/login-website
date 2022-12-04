@@ -21,3 +21,6 @@ Manage the routes
 
 Make call to API
 ### npm install --save axios
+
+Used to switch pages and render the new page without reloading the entire application
+### npm install --save history@5.3.0
