@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 
 import api from "../../config/configApi";
 
@@ -49,6 +49,11 @@ export const AddUser = () => {
       });
   }
 
+  const messageAdd = {
+    type: status.type,
+    message: status.message
+  }
+
   return (
     <div>
       <Link to="/dashboard">Dashboard</Link> <br />
@@ -57,7 +62,9 @@ export const AddUser = () => {
       <h1>Register User</h1>
 
       {status.type === "error" ? <p>{status.message}</p> : ""}
-      {status.type === "success" ? <p>{status.message}</p> : ""}
+      {status.type === "success"
+        ? <Navigate to="/users" state={messageAdd} />
+        : ""}
 
       <form onSubmit={addUser}>
         <label>Name: </label>
