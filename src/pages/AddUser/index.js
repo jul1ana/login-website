@@ -60,8 +60,9 @@ export const AddUser = () => {
       <Link to="/users">Users</Link> <br />
 
       <h1>Register User</h1>
+      <Link to="/users">List Users</Link> <br />
 
-      {status.type === "error" ? <p>{status.message}</p> : ""}
+      {status.type === "error" ? <p style={{ color: "#ff0000" }}>{status.message}</p> : ""}
       {status.type === "success"
         ? <Navigate to="/users" state={messageAdd} />
         : ""}

@@ -6,6 +6,7 @@ import { AddUser } from "../pages/AddUser";
 import { Dashboard } from "../pages/Dashboard";
 import { Login } from "../pages/Login";
 import { Users } from "../pages/Users";
+import { ViewUser } from "../pages/ViewUser";
 
 function CustomRoute({ children, redirectTo }) {
   const { authenticated } = useContext(Context);
@@ -20,6 +21,7 @@ export default function RoutesAdm() {
       <Route path="/dashboard" element={<CustomRoute redirectTo="/"><Dashboard /></CustomRoute>} />
       <Route path="/users" element={<CustomRoute redirectTo="/"><Users /></CustomRoute>} />
       <Route path="/add-user" element={<CustomRoute redirectTo="/"><AddUser /></CustomRoute>} />
+      <Route path="/view-user/:id" element={<CustomRoute redirectTo="/"><ViewUser /></CustomRoute>} />
     </Routes>
   );
 }
