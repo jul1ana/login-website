@@ -43,6 +43,35 @@ export const Users = () => {
     getUsers();
   }, []);
 
+  const deleteUser = async (idUser) => {
+    const headers = {
+      "headers": {
+        "Authorization": "Bearer " + localStorage.getItem("token")
+      }
+    }
+
+    await api.delete("/user/" + idUser, headers)
+      .then((response) => {
+        setStatus({
+          type: "success",
+          message: response.data.message
+        });
+        getUsers();
+      }).catch((err) => {
+        if (err.response) {
+          setStatus({
+            type: "error",
+            message: err.response.data.message
+          });
+        } else {
+          setStatus({
+            type: "error",
+            message: "ERROR: Try later!"
+          });
+        }
+      });
+  }
+
   return (
     <>
       <Link to="/dashboard">Dashboard</Link> <br />
@@ -61,7 +90,11 @@ export const Users = () => {
           <span>{user.email}</span> <br /><br />
 
           <Link to={"/view-user/" + user.id}><button type="button">View</button></Link><br /> <br />
-          <Link to={"/edit-user/" + user.id}><button type="button">Edit</button></Link><br /> <br /><hr />
+          <Link to={"/edit-user/" + user.id}><button type="button">Edit</button></Link><br /> <br />
+          <Link to={"#"}>
+            <button type="button" onClick={() => deleteUser(user.id)}>Delete</button>
+          </Link><br /> <br />
+          <hr />
         </div>
       ))}
     </>
