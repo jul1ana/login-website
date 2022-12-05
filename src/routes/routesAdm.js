@@ -4,6 +4,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import { Context } from "../Context/AuthContext";
 import { AddUser } from "../pages/AddUser";
 import { Dashboard } from "../pages/Dashboard";
+import { EditUser } from "../pages/EditUser";
 import { Login } from "../pages/Login";
 import { Users } from "../pages/Users";
 import { ViewUser } from "../pages/ViewUser";
@@ -22,6 +23,7 @@ export default function RoutesAdm() {
       <Route path="/users" element={<CustomRoute redirectTo="/"><Users /></CustomRoute>} />
       <Route path="/add-user" element={<CustomRoute redirectTo="/"><AddUser /></CustomRoute>} />
       <Route path="/view-user/:id" element={<CustomRoute redirectTo="/"><ViewUser /></CustomRoute>} />
+      <Route path="/edit-user/:id" element={<CustomRoute redirectTo="/"><EditUser /></CustomRoute>} />
     </Routes>
   );
 }

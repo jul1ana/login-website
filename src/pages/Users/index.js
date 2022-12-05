@@ -58,9 +58,10 @@ export const Users = () => {
         <div key={user.id}>
           <span>{user.id}</span> <br />
           <span>{user.name}</span> <br />
-          <span>{user.email}</span> <br />
+          <span>{user.email}</span> <br /><br />
 
-          <Link to={"/view-user/" + user.id}><button type="button">View</button></Link><br /> <hr />
+          <Link to={"/view-user/" + user.id}><button type="button">View</button></Link><br /> <br />
+          <Link to={"/edit-user/" + user.id}><button type="button">Edit</button></Link><br /> <br /><hr />
         </div>
       ))}
     </>
