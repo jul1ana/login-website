@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, Navigate, useParams } from "react-router-dom";
 
 import api from "../../config/configApi";
+import { serviceDeleteUser } from "../../services/serviceDeleteUser";
 
 export const EditUser = () => {
 
@@ -29,7 +30,7 @@ export const EditUser = () => {
     await api.put("/user", { id, name, email, password }, headers)
       .then((response) => {
         setStatus({
-          type: "success",
+          type: "redirectedSuccess",
           message: response.data.message
         });
       }).catch((err) => {
@@ -63,19 +64,19 @@ export const EditUser = () => {
             setEmail(response.data.user.email);
           } else {
             setStatus({
-              type: "warning",
+              type: "redirectedWarning",
               message: "ERROR: User not found!"
             });
           }
         }).catch((err) => {
           if (err.response) {
             setStatus({
-              type: "warning",
+              type: "redirectedWarning",
               message: err.response.data.message
             });
           } else {
             setStatus({
-              type: "warning",
+              type: "redirectedWarning",
               message: "ERROR: Try later!"
             });
           }
@@ -84,6 +85,29 @@ export const EditUser = () => {
 
     getUser();
   }, [id]);
+
+  const deleteUser = async (idUser) => {
+    const response = await serviceDeleteUser(idUser);
+
+    if (response) {
+      if (response.type === "success") {
+        setStatus({
+          type: "redirectedSuccess",
+          message: response.message
+        });
+      } else {
+        setStatus({
+          type: "error",
+          message: response.message
+        });
+      }
+    } else {
+      setStatus({
+        type: "error",
+        message: "ERROR: Try later!"
+      });
+    }
+  }
 
   const messageAddError = {
     type: "error",
@@ -101,12 +125,16 @@ export const EditUser = () => {
       <Link to="/users">Users</Link> <br />
 
       <h1>Edit User</h1>
-      <Link to="/users">List Users</Link> <br />
+      <Link to="/users"><button type="button">List</button></Link> {" "}
+      <Link to={"/view-user/" + id}><button type="button">View</button></Link> {" "}
+      <Link to={"#"}>
+        <button type="button" onClick={() => deleteUser(id)}>Delete</button>
+      </Link><br /> <br />
 
-      {status.type === "warning"
+      {status.type === "redirectedWarning"
         ? <Navigate to="/users" state={messageAddError} />
         : ""}
-      {status.type === "success"
+      {status.type === "redirectedSuccess"
         ? <Navigate to="/users" state={messageAddSuccess} />
         : ""}
       {status.type === "error" ? <p style={{ color: "#ff0000" }}>{status.message}</p> : ""}

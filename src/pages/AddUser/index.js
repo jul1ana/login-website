@@ -60,12 +60,14 @@ export const AddUser = () => {
       <Link to="/users">Users</Link> <br />
 
       <h1>Register User</h1>
-      <Link to="/users">List Users</Link> <br />
+      <Link to="/users"><button type="button">List</button></Link> <br />
 
       {status.type === "error" ? <p style={{ color: "#ff0000" }}>{status.message}</p> : ""}
       {status.type === "success"
         ? <Navigate to="/users" state={messageAdd} />
         : ""}
+
+      <hr />
 
       <form onSubmit={addUser}>
         <label>Name: </label>
