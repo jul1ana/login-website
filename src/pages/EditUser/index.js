@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, Navigate, useParams } from "react-router-dom";
+import * as yup from "yup";
 
 import api from "../../config/configApi";
 import { serviceDeleteUser } from "../../services/serviceDeleteUser";
@@ -20,7 +21,7 @@ export const EditUser = () => {
   const editUser = async e => {
     e.preventDefault();
 
-    if (!validate()) return;
+    if (!(await validate())) return;
 
     const headers = {
       "headers": {
@@ -88,27 +89,55 @@ export const EditUser = () => {
     getUser();
   }, [id]);
 
-  function validate() {
-    if (!name) return setStatus({
-      type: "error",
-      message: "ERROR: Need to fill in the name field!"
+  // function validate() {
+  //   if (!name) return setStatus({
+  //     type: "error",
+  //     message: "ERROR: Need to fill in the name field!"
+  //   });
+
+  //   if (!email) return setStatus({
+  //     type: "error",
+  //     message: "ERROR: Need to fill in the e-mail field!"
+  //   });
+
+  //   if (!password) return setStatus({
+  //     type: "error",
+  //     message: "ERROR: Need to fill in the password field!"
+  //   });
+  //   if (password.length < 6) return setStatus({
+  //     type: "error",
+  //     message: "ERROR: Password must be at least 6 characters long!"
+  //   });
+
+  //   return true;
+  // }
+
+  async function validate() {
+    let schema = yup.object().shape({
+      password: yup.string("ERROR: Need to fill in the password field! - 5")
+        .required("ERROR: Need to fill in the password field! - 5")
+        .min(6, "ERROR: Password must be at least 6 characters long! - 5"),
+      email: yup.string("ERROR: Need to fill in the e-mail field! - 5")
+        .email("ERROR: Need to fill in the e-mail field! - 5")
+        .required("ERROR: Need to fill in the e-mail field! - 5"),
+      name: yup.string("ERROR: Need to fill in the name field! - 5")
+        .required("ERROR: Need to fill in the name field! - 5")
     });
 
-    if (!email) return setStatus({
-      type: "error",
-      message: "ERROR: Need to fill in the e-mail field!"
-    });
-
-    if (!password) return setStatus({
-      type: "error",
-      message: "ERROR: Need to fill in the password field!"
-    });
-    if (password.length < 6) return setStatus({
-      type: "error",
-      message: "ERROR: Password must be at least 6 characters long!"
-    });
-
-    return true;
+    try {
+      await schema.validate({
+        name,
+        email,
+        password
+      });
+      return true;
+    } catch (err) {
+      setStatus({
+        type: "error",
+        message: err.errors
+      });
+      return false;
+    }
   }
 
   const deleteUser = async (idUser) => {

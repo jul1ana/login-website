@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, Navigate } from "react-router-dom";
+import * as yup from "yup";
 
 import api from "../../config/configApi";
 
@@ -21,7 +22,7 @@ export const AddUser = () => {
   const addUser = async e => {
     e.preventDefault();
 
-    if (!validate()) return;
+    if (!(await validate())) return; //pausa o processamento de der erro
 
     const headers = {
       "headers": {
@@ -56,27 +57,32 @@ export const AddUser = () => {
     message: status.message
   }
 
-  function validate() {
-    if (!user.name) return setStatus({
-      type: "error",
-      message: "ERROR: Need to fill in the name field!"
+  async function validate() {
+    let schema = yup.object().shape({
+      password: yup.string("ERROR: Need to fill in the password field!")
+        .required("ERROR: Need to fill in the password field!")
+        .min(6, "ERROR: Password must be at least 6 characters long!"),
+      email: yup.string("ERROR: Need to fill in the e-mail field!")
+        .email("ERROR: Need to fill in the e-mail field!")
+        .required("ERROR: Need to fill in the e-mail field!"),
+      name: yup.string("ERROR: Need to fill in the name field!")
+        .required("ERROR: Need to fill in the name field!")
     });
 
-    if (!user.email) return setStatus({
-      type: "error",
-      message: "ERROR: Need to fill in the e-mail field!"
-    });
-
-    if (!user.password) return setStatus({
-      type: "error",
-      message: "ERROR: Need to fill in the password field!"
-    });
-    if (user.password.length < 6) return setStatus({
-      type: "error",
-      message: "ERROR: Password must be at least 6 characters long!"
-    });
-
-    return true;
+    try {
+      await schema.validate({
+        name: user.name,
+        email: user.email,
+        password: user.password,
+      });
+      return true;
+    } catch (err) {
+      setStatus({
+        type: "error",
+        message: err.errors
+      });
+      return false;
+    }
   }
 
   return (
