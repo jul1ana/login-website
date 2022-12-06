@@ -1,11 +1,13 @@
 import React, { useContext, useState } from "react";
 
-import { useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import api from "../../config/configApi";
 import { Context } from "../../Context/AuthContext";
 
 export const Login = () => {
+
+  const { state } = useLocation();
 
   const navigate = useNavigate();
 
@@ -18,8 +20,8 @@ export const Login = () => {
   });
 
   const [status, setStatus] = useState({
-    type: "",
-    message: "",
+    type: state ? state.type : "",
+    message: state ? state.message : "",
     loading: false
   });
 
@@ -84,8 +86,10 @@ export const Login = () => {
         <label>Password: </label>
         <input type="password" name="password" placeholder="Enter your password" autoComplete="on" onChange={valueInput} /> <br /><br />
 
-        {status.loading ? <button type="submit" disabled >Accessing...</button> : <button type="submit">Acessar</button>}
+        {status.loading ? <button type="submit" disabled >Accessing...</button> : <button type="submit">Acessar</button>} <br /><br />
       </form>
+
+      <Link to="/add-user-login">Register</Link>
     </div>
   );
 };
