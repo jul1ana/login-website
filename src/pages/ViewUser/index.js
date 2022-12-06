@@ -3,6 +3,7 @@ import { Link, Navigate, useParams } from "react-router-dom";
 
 import { serviceDeleteUser } from "../../services/serviceDeleteUser";
 import api from "../../config/configApi";
+import { Menu } from "../../components/Menu";
 
 export const ViewUser = (props) => {
 
@@ -86,8 +87,7 @@ export const ViewUser = (props) => {
 
   return (
     <div>
-      <Link to="/dashboard">Dashboard</Link> <br />
-      <Link to="/users">Users</Link> <br />
+      <Menu />
 
       <h1>User Details</h1>
       <Link to="/users"><button type="button">List</button></Link>{" "}

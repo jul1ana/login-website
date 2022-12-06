@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import * as yup from "yup";
 
+import { Menu } from "../../components/Menu";
 import api from "../../config/configApi";
 
 export const AddUser = () => {
@@ -87,8 +88,7 @@ export const AddUser = () => {
 
   return (
     <div>
-      <Link to="/dashboard">Dashboard</Link> <br />
-      <Link to="/users">Users</Link> <br />
+      <Menu />
 
       <h1>Register User</h1>
       <Link to="/users"><button type="button">List</button></Link> <br />

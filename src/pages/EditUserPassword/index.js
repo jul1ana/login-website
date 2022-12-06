@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, Navigate, useParams } from "react-router-dom";
 import * as yup from "yup";
 
+import { Menu } from "../../components/Menu";
 import api from "../../config/configApi";
 import { serviceDeleteUser } from "../../services/serviceDeleteUser";
 
@@ -143,8 +144,7 @@ export const EditUserPassword = () => {
 
   return (
     <div>
-      <Link to="/dashboard">Dashboard</Link> <br />
-      <Link to="/users">Users</Link> <br />
+      <Menu />
 
       <h1>Edit User</h1>
       <Link to="/users"><button type="button">List</button></Link> {" "}
