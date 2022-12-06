@@ -5,6 +5,7 @@ import { Context } from "../Context/AuthContext";
 import { AddUser } from "../pages/AddUser";
 import { Dashboard } from "../pages/Dashboard";
 import { EditUser } from "../pages/EditUser";
+import { EditUserPassword } from "../pages/EditUserPassword";
 import { Login } from "../pages/Login";
 import { Users } from "../pages/Users";
 import { ViewUser } from "../pages/ViewUser";
@@ -18,12 +19,13 @@ function CustomRoute({ children, redirectTo }) {
 export default function RoutesAdm() {
   return (
     <Routes>
-      <Route path="/" element={<Login />} />
-      <Route path="/dashboard" element={<CustomRoute redirectTo="/"><Dashboard /></CustomRoute>} />
-      <Route path="/users" element={<CustomRoute redirectTo="/"><Users /></CustomRoute>} />
-      <Route path="/add-user" element={<CustomRoute redirectTo="/"><AddUser /></CustomRoute>} />
-      <Route path="/view-user/:id" element={<CustomRoute redirectTo="/"><ViewUser /></CustomRoute>} />
-      <Route path="/edit-user/:id" element={<CustomRoute redirectTo="/"><EditUser /></CustomRoute>} />
+      <Route exact path="/" element={<Login />} />
+      <Route exact path="/dashboard" element={<CustomRoute redirectTo="/"><Dashboard /></CustomRoute>} />
+      <Route exact path="/users" element={<CustomRoute redirectTo="/"><Users /></CustomRoute>} />
+      <Route exact path="/add-user" element={<CustomRoute redirectTo="/"><AddUser /></CustomRoute>} />
+      <Route exact path="/view-user/:id" element={<CustomRoute redirectTo="/"><ViewUser /></CustomRoute>} />
+      <Route exact path="/edit-user/:id" element={<CustomRoute redirectTo="/"><EditUser /></CustomRoute>} />
+      <Route exact path="/edit-user-password/:id" element={<CustomRoute redirectTo="/"><EditUserPassword /></CustomRoute>} />
     </Routes>
   );
 }

@@ -92,6 +92,7 @@ export const ViewUser = (props) => {
       <h1>User Details</h1>
       <Link to="/users"><button type="button">List</button></Link>{" "}
       <Link to={"/edit-user/" + data.id}><button type="button">Edit</button></Link>{" "}
+      <Link to={"/edit-user-password/" + data.id}><button type="button">Edit Password</button></Link>{" "}
       <Link to={"#"}><button type="button" onClick={() => deleteUser(data.id)}>Delete</button></Link>{" "}
 
       {status.type === "redirectedError"

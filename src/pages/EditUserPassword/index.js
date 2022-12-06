@@ -5,10 +5,11 @@ import * as yup from "yup";
 import api from "../../config/configApi";
 import { serviceDeleteUser } from "../../services/serviceDeleteUser";
 
-export const EditUser = () => {
+export const EditUserPassword = () => {
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const { id } = useParams();
 
@@ -29,7 +30,7 @@ export const EditUser = () => {
       }
     }
 
-    await api.put("/user", { id, name, email }, headers)
+    await api.put("/user-password", { id, password }, headers)
       .then((response) => {
         setStatus({
           type: "redirectedSuccess",
@@ -90,18 +91,13 @@ export const EditUser = () => {
 
   async function validate() {
     let schema = yup.object().shape({
-      email: yup.string("ERROR: Need to fill in the e-mail field!")
-        .email("ERROR: Need to fill in the e-mail field!")
-        .required("ERROR: Need to fill in the e-mail field!"),
-      name: yup.string("ERROR: Need to fill in the name field!")
-        .required("ERROR: Need to fill in the name field!")
+      password: yup.string("ERROR: Need to fill in the password field!")
+        .required("ERROR: Need to fill in the password field!")
+        .min(6, "ERROR: Password must be at least 6 characters long!")
     });
 
     try {
-      await schema.validate({
-        name,
-        email,
-      });
+      await schema.validate({ password });
       return true;
     } catch (err) {
       setStatus({
@@ -166,30 +162,25 @@ export const EditUser = () => {
       {status.type === "error" ? <p style={{ color: "#ff0000" }}>{status.message}</p> : ""}
 
       <hr />
-      <form onSubmit={editUser}>
-        <label>Name*: </label>
-        <input
-          type="text"
-          name="name"
-          placeholder="User's full name"
-          value={name}
-          onChange={text => setName(text.target.value)}
-        /> <br /> <br />
 
-        <label>E-mail*: </label>
+      <form onSubmit={editUser}>
+
+        <label>Name: {name} </label> <br />
+        <label>E-mail: {email} </label><br /><br />
+
+        <label>Password*: </label>
         <input
-          type="email"
-          name="email"
-          placeholder="Best user email"
-          value={email}
-          onChange={text => setEmail(text.target.value)}
+          type="password"
+          name="password"
+          placeholder="Password to access the system"
+          autoComplete="on"
+          onChange={text => setPassword(text.target.value)}
         /> <br /> <br />
 
         * Required field <br /><br />
 
         <button type="submit">Save</button>
       </form>
-
     </div>
   );
 }
