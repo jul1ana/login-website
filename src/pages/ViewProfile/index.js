@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { Navigate } from "react-router-dom";
+import { Link, Navigate, useLocation } from "react-router-dom";
 
 import { Menu } from "../../components/Menu";
 import api from "../../config/configApi";
 
 export const ViewProfile = () => {
 
+  const { state } = useLocation();
+
   const [data, setData] = useState("");
 
   const [status, setStatus] = useState({
-    type: "",
-    message: ""
+    type: state ? state.type : "",
+    message: state ? state.message : ""
   });
 
   useEffect(() => {
@@ -60,12 +62,13 @@ export const ViewProfile = () => {
       <Menu />
 
       <h1>Profile</h1>
+      <Link to="/edit-profile"><button type="button">Edit</button></Link> {" "}
 
       {status.type === "redirectedError"
         ? <Navigate to="/login" state={messageAddError} />
         : ""}
 
-      {status.type === "success" ? <p>{status.message}</p> : ""}
+      {status.type === "success" ? <p style={{ color: "green" }}>{status.message}</p> : ""}
       <hr />
 
       <span>{data.id}</span> <br />
