@@ -8,6 +8,7 @@ import { EditUser } from "../pages/EditUser";
 import { EditUserPassword } from "../pages/EditUserPassword";
 import { Login } from "../pages/Login";
 import { Users } from "../pages/Users";
+import { ViewProfile } from "../pages/ViewProfile";
 import { ViewUser } from "../pages/ViewUser";
 
 function CustomRoute({ children, redirectTo }) {
@@ -26,6 +27,7 @@ export default function RoutesAdm() {
       <Route exact path="/view-user/:id" element={<CustomRoute redirectTo="/"><ViewUser /></CustomRoute>} />
       <Route exact path="/edit-user/:id" element={<CustomRoute redirectTo="/"><EditUser /></CustomRoute>} />
       <Route exact path="/edit-user-password/:id" element={<CustomRoute redirectTo="/"><EditUserPassword /></CustomRoute>} />
+      <Route exact path="/view-profile" element={<CustomRoute redirectTo="/"><ViewProfile /></CustomRoute>} />
     </Routes>
   );
 }
