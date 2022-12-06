@@ -5,6 +5,7 @@ import { Context } from "../Context/AuthContext";
 import { AddUser } from "../pages/AddUser";
 import { Dashboard } from "../pages/Dashboard";
 import { EditProfile } from "../pages/EditProfile";
+import { EditProfilePassword } from "../pages/EditProfilePassword";
 import { EditUser } from "../pages/EditUser";
 import { EditUserPassword } from "../pages/EditUserPassword";
 import { Login } from "../pages/Login";
@@ -30,6 +31,7 @@ export default function RoutesAdm() {
       <Route exact path="/edit-user-password/:id" element={<CustomRoute redirectTo="/"><EditUserPassword /></CustomRoute>} />
       <Route exact path="/view-profile" element={<CustomRoute redirectTo="/"><ViewProfile /></CustomRoute>} />
       <Route exact path="/edit-profile" element={<CustomRoute redirectTo="/"><EditProfile /></CustomRoute>} />
+      <Route exact path="/edit-profile-password" element={<CustomRoute redirectTo="/"><EditProfilePassword /></CustomRoute>} />
     </Routes>
   );
 }

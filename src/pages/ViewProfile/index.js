@@ -63,6 +63,7 @@ export const ViewProfile = () => {
 
       <h1>Profile</h1>
       <Link to="/edit-profile"><button type="button">Edit</button></Link> {" "}
+      <Link to="/edit-profile-password"><button type="button">Edit Password</button></Link> {" "}
 
       {status.type === "redirectedError"
         ? <Navigate to="/login" state={messageAddError} />
