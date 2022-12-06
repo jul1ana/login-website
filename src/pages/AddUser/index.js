@@ -70,14 +70,16 @@ export const AddUser = () => {
       <hr />
 
       <form onSubmit={addUser}>
-        <label>Name: </label>
+        <label>Name*: </label>
         <input type="text" name="name" placeholder="User's full name" onChange={valueInput} /> <br /> <br />
 
-        <label>E-mail: </label>
+        <label>E-mail*: </label>
         <input type="email" name="email" placeholder="Best user email" onChange={valueInput} /> <br /> <br />
 
-        <label>Password: </label>
+        <label>Password*: </label>
         <input type="password" name="password" placeholder="Password to access the system" autoComplete="on" onChange={valueInput} /> <br /> <br />
+
+        * Required field <br /><br />
 
         <button type="submit">Register</button>
       </form>

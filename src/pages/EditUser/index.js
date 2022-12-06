@@ -141,7 +141,7 @@ export const EditUser = () => {
 
       <hr />
       <form onSubmit={editUser}>
-        <label>Name: </label>
+        <label>Name*: </label>
         <input
           type="text"
           name="name"
@@ -150,7 +150,7 @@ export const EditUser = () => {
           onChange={text => setName(text.target.value)}
         /> <br /> <br />
 
-        <label>E-mail: </label>
+        <label>E-mail*: </label>
         <input
           type="email"
           name="email"
@@ -159,7 +159,7 @@ export const EditUser = () => {
           onChange={text => setEmail(text.target.value)}
         /> <br /> <br />
 
-        <label>Password: </label>
+        <label>Password*: </label>
         <input
           type="password"
           name="password"
@@ -167,6 +167,8 @@ export const EditUser = () => {
           autoComplete="on"
           onChange={text => setPassword(text.target.value)}
         /> <br /> <br />
+
+        * Required field <br /><br />
 
         <button type="submit">Save</button>
       </form>
