@@ -9,23 +9,31 @@ export const Users = () => {
   const { state } = useLocation();
 
   const [data, setData] = useState([]);
+  const [page, setPage] = useState("");
+  const [lastPage, setLastPage] = useState("");
 
   const [status, setStatus] = useState({
     type: state ? state.type : "",
     message: state ? state.message : ""
   });
 
-  const getUsers = async () => {
+  const getUsers = async (page) => {
+    if (page === undefined) {
+      page = 1;
+    }
+    setPage(page);
+
     const headers = {
       "headers": {
         "Authorization": "Bearer " + localStorage.getItem("token")
       }
     }
 
-    await api.get("/users", headers)
+    await api.get("/users/" + page, headers)
       .then((response) => {
         //recebendo os dados da API
         setData(response.data.users);
+        setLastPage(response.data.lastPage);
       }).catch((err) => {
         if (err.response) {
           setStatus({
@@ -68,7 +76,7 @@ export const Users = () => {
       <Link to="/users">Users</Link> <br />
 
       <h1>List Users</h1>
-      <Link to="/add-user"><button type="button">Register</button></Link> <br /> 
+      <Link to="/add-user"><button type="button">Register</button></Link> <br />
 
       {status.type === "error" ? <p style={{ color: "#ff0000" }} >{status.message}</p> : ""}
       {status.type === "success" ? <p style={{ color: "green" }}>{status.message}</p> : ""}
@@ -88,6 +96,27 @@ export const Users = () => {
           <hr />
         </div>
       ))}
+
+      {page !== 1 ?
+        <button type="button" onClick={() => getUsers(1)}>First</button> :
+        <button type="button" disabled>First</button>
+      } {" "}
+
+      {page !== 1 ?
+        <button type="button" onClick={() => getUsers(page - 1)}>{page - 1}</button> :
+        ""
+      } {" "}
+
+      <button type="button" disabled>{page}</button> {" "}
+
+      {page + 1 <= lastPage ? <button type="button" onClick={() => getUsers(page + 1)}>{page + 1}</button> :
+        ""
+      } {" "}
+
+      {page !== lastPage ?
+        <button type="button" onClick={() => getUsers(lastPage)}>Last</button> :
+        <button type="button" disabled>Last</button>
+      } {" "}
     </>
   );
 }
