@@ -21,6 +21,8 @@ export const AddUser = () => {
   const addUser = async e => {
     e.preventDefault();
 
+    if (!validate()) return;
+
     const headers = {
       "headers": {
         "Content-Type": "application/json",
@@ -52,6 +54,29 @@ export const AddUser = () => {
   const messageAdd = {
     type: status.type,
     message: status.message
+  }
+
+  function validate() {
+    if (!user.name) return setStatus({
+      type: "error",
+      message: "ERROR: Need to fill in the name field!"
+    });
+
+    if (!user.email) return setStatus({
+      type: "error",
+      message: "ERROR: Need to fill in the e-mail field!"
+    });
+
+    if (!user.password) return setStatus({
+      type: "error",
+      message: "ERROR: Need to fill in the password field!"
+    });
+    if (user.password.length < 6) return setStatus({
+      type: "error",
+      message: "ERROR: Password must be at least 6 characters long!"
+    });
+
+    return true;
   }
 
   return (

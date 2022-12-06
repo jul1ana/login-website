@@ -20,6 +20,8 @@ export const EditUser = () => {
   const editUser = async e => {
     e.preventDefault();
 
+    if (!validate()) return;
+
     const headers = {
       "headers": {
         "Content-Type": "application/json",
@@ -85,6 +87,29 @@ export const EditUser = () => {
 
     getUser();
   }, [id]);
+
+  function validate() {
+    if (!name) return setStatus({
+      type: "error",
+      message: "ERROR: Need to fill in the name field!"
+    });
+
+    if (!email) return setStatus({
+      type: "error",
+      message: "ERROR: Need to fill in the e-mail field!"
+    });
+
+    if (!password) return setStatus({
+      type: "error",
+      message: "ERROR: Need to fill in the password field!"
+    });
+    if (password.length < 6) return setStatus({
+      type: "error",
+      message: "ERROR: Password must be at least 6 characters long!"
+    });
+
+    return true;
+  }
 
   const deleteUser = async (idUser) => {
     const response = await serviceDeleteUser(idUser);
