@@ -10,6 +10,7 @@ import { EditProfilePassword } from "../pages/EditProfilePassword";
 import { EditUser } from "../pages/EditUser";
 import { EditUserPassword } from "../pages/EditUserPassword";
 import { Login } from "../pages/Login";
+import { RecoverPassword } from "../pages/RecoverPassword";
 import { Users } from "../pages/Users";
 import { ViewProfile } from "../pages/ViewProfile";
 import { ViewUser } from "../pages/ViewUser";
@@ -25,6 +26,7 @@ export default function RoutesAdm() {
     <Routes>
       <Route exact path="/" element={<Login />} />
       <Route exact path="/add-user-login" element={<AddUserLogin />} />
+      <Route exact path="/recover-password" element={<RecoverPassword />} />
 
       <Route exact path="/dashboard" element={<CustomRoute redirectTo="/"><Dashboard /></CustomRoute>} />
       <Route exact path="/users" element={<CustomRoute redirectTo="/"><Users /></CustomRoute>} />

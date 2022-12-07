@@ -110,7 +110,7 @@ export const AddUserLogin = () => {
       </form>
 
       <br />
-      <Link to="/">Login</Link>
+      <Link to="/">Access</Link>
     </div>
   );
 }
